@@ -1,1 +1,3 @@
 # blog
+
+developed on windows
