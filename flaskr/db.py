@@ -12,6 +12,19 @@ import sqlite3
 import click
 from flask import current_app, g
 
+# sql commands
+def init_db():
+	db = get_db()
+
+	with current_app.open_resource('schema.sql') as f:
+		db.executescript(f.read().decode('utf8'))
+
+@click.command('init-db')
+def init_db_command():
+	# clear the existing data and create new tables.
+	init_db()
+	click.echo('Initialized database.')
+
 
 def get_db():
 	if 'db' not in g:
@@ -29,19 +42,6 @@ def close_db(e=None):
 	if db is not None:
 		db.close()
 
-# sql commands
-def init_db():
-	db = get_db()
-
-	with current_app.open_resource('schema.sql') as f:
-		db.executescript(f.read().decode('utf8'))
-
-
-@click.command('init-db')
-def init_db_command():
-	# clear the existing data and create new tables.
-	init_db()
-	click.echo('Initialized database.')
 
 
 # app register
