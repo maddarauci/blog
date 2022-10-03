@@ -39,6 +39,7 @@ def register():
 			else:
 				return redirect(url_for("auth.login"))
 		flash(error)
+	return render_template('auth/register.html')
 
 # login
 @bp.route('/login', methods=('GET', 'POST'))
@@ -64,6 +65,7 @@ def login():
 			return redirect(url_for('index'))
 
 		flash(error)
+	return render_template('auth/login.html')
 
 # load session (only if user logged in before)
 @bp.before_app_request
@@ -75,7 +77,7 @@ def load_logged_in_user():
 	else:
 		g.user = get_db().execute(
 			'SELECT * FROM user WHERE id = ?', (user_id,)
-			)fetchone()
+			).fetchone()
 
 # logout: remove the user id from session and return to main index page!
 @bp.route('/logout')
@@ -96,6 +98,3 @@ def login_required(view):
 	return wrapped_view
 
 
-return render_template('auth/login.html')
-
-return render_template('auth/register.html')

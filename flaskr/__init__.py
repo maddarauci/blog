@@ -39,7 +39,7 @@ def create_app(test_config=None):
 
 	# blueprint register
 	from . import auth 
-	app.register.blueprint(auth.bp)
+	app.register_blueprint(auth.bp)
 
 	return app
 
