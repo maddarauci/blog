@@ -26,6 +26,7 @@ def register():
 		elif not password:
 			error = 'Password is required!'
 
+		# after user provides username and password (create the account!)
 		if error is None:
 			try:
 				db.execute(
@@ -63,6 +64,36 @@ def login():
 			return redirect(url_for('index'))
 
 		flash(error)
+
+# load session (only if user logged in before)
+@bp.before_app_request
+def load_logged_in_user():
+	user_id = session.get('user_id')
+
+	if user_id is None:
+		g.user_id = None
+	else:
+		g.user = get_db().execute(
+			'SELECT * FROM user WHERE id = ?', (user_id,)
+			)fetchone()
+
+# logout: remove the user id from session and return to main index page!
+@bp.route('/logout')
+def logout():
+	session.clear()
+	return redirect(url_for('index'))
+
+
+# Authentication Required: only if user wants to post and edit posts
+def login_required(view):
+	@functools.wraps(view)
+	def wrapped_view(**kwargs):
+		# if user if not alreadu logged in
+		if g.user is None:
+			# goto login page
+			return redirect(url_for('auth.login'))
+		return view(**kwargs)
+	return wrapped_view
 
 
 return render_template('auth/login.html')
