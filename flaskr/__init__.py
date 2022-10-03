@@ -1,6 +1,12 @@
 import os
 from flask import Flask
 
+# locals:
+# import db
+
+# THE FACTORY:
+
+
 def create_app(test_config=None):
 	# crate and configure the app 
 	app = Flask(__name__, instance_relative_config=True)
@@ -28,9 +34,12 @@ def create_app(test_config=None):
 	def hello():
 		return 'hello world'
 
+	from . import db
+	db.init_app(app)
+
 	return app
 
 
 
 
-	print("Done")
+print("Done")
