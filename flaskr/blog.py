@@ -1,12 +1,13 @@
 #./flaskr/blog.py
 from flask import (
-	Blueprint as bp, flash, g, redirect, render_template, request, url_for
+	Blueprint, flash, g, redirect, render_template, request, url_for
 	)
 from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
+bp = Blueprint("blog", __name__)
 
 @bp.route('/')
 def index():
