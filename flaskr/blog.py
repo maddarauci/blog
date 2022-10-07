@@ -1,3 +1,4 @@
+#./flaskr/blog.py
 from flask import (
 	Blueprint as bp, flash, g, redirect, render_template, request, url_for
 	)
