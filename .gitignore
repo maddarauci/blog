@@ -1,4 +1,4 @@
 env
 rules.md
 *.in
-test/data.sql
+test
