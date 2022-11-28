@@ -67,3 +67,14 @@ def test_author_required(app, client, auth):
 def test_exists_required(client, auth, path):
 	auth.login()
 	assert client.post(path).status_code == 404
+
+
+'''
+The create and update views should render and return a 200 OK status for a GET request.
+When valid data is sent in a POST request, create should insert the new post data into the database,
+and update should modify the existing data.
+Both pages should show an error message on invalid data.
+
+'''
+
+
