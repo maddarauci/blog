@@ -55,3 +55,16 @@ def test_login(client, auth):
 def test_login_valide_input(auth, username, password, message):
 	response = auth.login(username, password)
 	assert message in response.data
+
+# Logout
+'''
+Testing logout is the opposite of login.
+session should not contain user_id after logging out.
+'''
+def test_logout(client, auth):
+	auth.logint()
+
+	with client:
+		auth.logout()
+		assert 'user_id' not in session
+
