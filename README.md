@@ -12,3 +12,28 @@ $ flask --app "filename" run
 	* Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
 ```
 
+## Running the Tests:
+> 1. To run the tests, use the pytest command.
+It will find and run all the test functions.
+```
+$ pytest
+
+========================= test session starts ==========================
+platform linux -- Python 3.6.4, pytest-3.5.0, py-1.5.3, pluggy-0.6.0
+rootdir: /home/user/Projects/flask-tutorial, inifile: setup.cfg
+collected 23 items
+
+test/test_auth.py ........                                      [ 34%]
+test/test_blog.py ............                                  [ 86%]
+test/test_db.py ..                                              [ 95%]
+test/test_factory.py ..                                         [100%]
+
+====================== 24 passed in 0.64 seconds =======================
+```
+
+If any tests fail, pytest will show the error that was raised. You can run pytest -v to get a list of each test function rather than dots.
+
+To measure the code coverage of your tests, use the coverage command to run pytest instead of running it directly.
+```
+converage run -m pytest
+```

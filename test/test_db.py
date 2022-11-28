@@ -4,7 +4,7 @@ import pytest
 from flaskr.db import get_db
 
 def test_get_close_db(app):
-	with open.app_context():
+	with app.app_context():
 		db = get_db()
 		assert db is get_db()
 
