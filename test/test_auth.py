@@ -7,11 +7,11 @@ def test_register(client, app):
 	response = client.post(
 		'auth/register', data={'username': 'a', 'password': 'a'}
 	)
-	assert response.header["Location"] == "/auth/login"
+	assert response.headers["Location"] == "/auth/login"
 
 	with app.app_context():
 		assert get_db().execute(
-			"SELECT * FROM user WHERE usename = 'a'",
+			"SELECT * FROM user WHERE username = 'a'",
 		).fetchone() is not None
 
 @pytest.mark.parametrize(('username', 'password', 'message'), (
