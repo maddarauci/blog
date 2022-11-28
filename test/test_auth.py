@@ -21,6 +21,8 @@ def test_register(client, app):
 
 ))
 
+# Runs the same test function with different arguments.
+# Here it detects invalid input and response with error messages.
 def test_register_validate_input(client, username, password, message):
 	response = client.post(
 		'/auth/register',
@@ -28,3 +30,28 @@ def test_register_validate_input(client, username, password, message):
 	)
 	assert message in response.data
 
+# Test Login
+''' 
+The tests for the login view are very similar to those for register.
+Rather than testing the data in the database,
+session should have user_id set after logging in.
+'''
+
+def test_login(client, auth):
+	assert client.get('/auth/login').status_code == 200
+	response = auth.login()
+	assert response.headers["Location"] == "/"
+
+	with client:
+		client.get('/')
+		assert session['user_id'] == 1
+		assert g.user['username'] == 'test'
+
+@pytest.mark.parametrize(('username', 'password', 'message'), (
+	('a', 'test', b'Incorrect username!'),
+	('test', 'a', b'Incorrect password!'),
+))
+
+def test_login_valide_input(auth, username, password, message):
+	response = auth.login(username, password)
+	assert message in response.data
