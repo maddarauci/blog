@@ -1,6 +1,7 @@
 #./flaskr/__init__.py
 import os
 from flask import Flask
+import secrets
 
 # locals:
 # import db
@@ -12,7 +13,8 @@ def create_app(test_config=None):
 	# crate and configure the app 
 	app = Flask(__name__, instance_relative_config=True)
 	app.config.from_mapping (
-		SECRECT_KEY="dev",
+		SECRET_KEY='7c0e9d12ec39994f1161b8b06a33d0076518e80f4d52ca307c7ba813af25c93d',
+		#SECRECT_KEY = secrets.token_hex(),
 		DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
 	)
 

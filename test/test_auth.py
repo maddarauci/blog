@@ -62,7 +62,7 @@ Testing logout is the opposite of login.
 session should not contain user_id after logging out.
 '''
 def test_logout(client, auth):
-	auth.logint()
+	auth.login()
 
 	with client:
 		auth.logout()

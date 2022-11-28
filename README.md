@@ -28,7 +28,7 @@ test/test_blog.py ............                                  [ 86%]
 test/test_db.py ..                                              [ 95%]
 test/test_factory.py ..                                         [100%]
 
-====================== 24 passed in 0.64 seconds =======================
+====================== 20 failed, 4 passed in 0.64 seconds =======================
 ```
 
 If any tests fail, pytest will show the error that was raised. You can run pytest -v to get a list of each test function rather than dots.
