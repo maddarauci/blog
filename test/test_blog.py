@@ -112,3 +112,13 @@ def test_create_update_validate(client, auth, path):
 The delete view, should redirect to the index URL and the post
 should no longer exist in the db
 '''
+
+def test_delete(client, auth, app):
+	auth.login()
+	response = client.post('/1/delete')
+	assert response.headers["Location"] == "/"
+
+	with app.app_context():
+		db = get_db()
+		post = db.execute('SELECT * FROM post WHERE id = 1').fetchone()
+		assert post is None
