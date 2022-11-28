@@ -66,4 +66,4 @@ def test_author_required(app, client, auth):
 
 def test_exists_required(client, auth, path):
 	auth.login()
-	assert client.post(path).status_code == 403
+	assert client.post(path).status_code == 404
